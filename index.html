@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<!-- Тут максимально по-конченому зроблена логіка, по-нормальному нудно -->
+<head>
+	<title>Задача</title>
+</head>
+
+<body>
+	<noscript style="color:red;">
+		У тебе джаваскріпт вимкнений, так що нема сенсу нічого вводити
+		<br height="100vw" />
+	</noscript>
+
+	<div>
+		<h2>Задача:</h2>
+
+		<p>A є N; B є N;<p/>
+		<math>
+			<mroot>
+				<mi>
+					<input type="number" placeholder="A" id="num1" size="10" />
+					<sup>3</sup> + &nbsp
+					<input type="number" placeholder="B" id="num2" size="10" />
+					<sup>3</sup>
+				</mi>
+				<mn>3</mn>
+			</mroot> &nbsp є N
+		</math>
+	</div>
+	<br />
+
+	<button id="submit">Перевірити</button> &nbsp &nbsp &nbsp
+	<a href="https://github.com/lukassvaibodas/lukassvaibodas.github.io/blob/main/index.html">
+		Сирцевий код
+	</a>
+
+	<div id="out">
+		Тут будуть повідомлення про правильність рішення
+	</div>
+
+	<script>
+	(() => {
+		times = 0;
+
+		const checkInput = elId =>
+			(num = Number(document.getElementById(elId).value)) && isNatural(num) && num;
+
+		const isNatural = num =>
+			num > 0 && Math.abs(num - Math.ceil(num)) <= 1.7763568394002505E-15;
+
+		document.getElementById("submit").addEventListener("click", () =>
+			(outobj = document.getElementById('out'))
+			&& !(num1 = checkInput('num1'))
+			&& (outobj.innerHTML = `Помилка вводу (A): ${document.getElementById('num1').value} це ненатурельне число`)
+			|| !(num2 = checkInput('num2'))
+			&& (outobj.innerHTML = `Помилка вводу (B): ${document.getElementById('num2').value} це ненатуральне число`)
+			|| ++times < 50
+			&& (expr = (num1**3 + num2**3) ** (1/3))
+			&& (outobj.innerHTML = isNatural(expr)
+				&& `Вирішено: ${Math.ceil(expr)} це натуральне число`
+				|| `Лажа якась: ${expr} це ненатуральне число`)
+			|| alert(times == 50
+				&& (outobj.innerHTML = 'Іди свіжим повітрям подихай, ти уже 50 раз спробувала цю фігню вирішити')
+				|| 'Досить уже'));
+	})();
+	</script>
+</body>
+<!-- Треба ж якось 69 строк отримати -->
+</html>
