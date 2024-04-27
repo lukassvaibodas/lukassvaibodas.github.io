@@ -50,7 +50,7 @@
 
 		document.getElementById("submit").addEventListener("click", () =>
 			(outobj = document.getElementById('out'))
-			&& !(num1 = checkInput('num1'))
+			&& !(num1 = checkInput('num1'))i
 			&& (outobj.innerHTML = `Помилка вводу (A): ${document.getElementById('num1').value} це ненатурельне число`)
 			|| !(num2 = checkInput('num2'))
 			&& (outobj.innerHTML = `Помилка вводу (B): ${document.getElementById('num2').value} це ненатуральне число`)
