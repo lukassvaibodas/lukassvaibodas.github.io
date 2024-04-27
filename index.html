@@ -16,38 +16,50 @@
 		input[type=number] {
 			-moz-appearance: textfield;
 		}
+
+		input {
+			text-align: center;
+			width: 29.45vw;
+			border: solid gray 0.275vw;
+			padding: 0;
+			border-radius: 4px;
+		}
 	</style>
 </head>
 
 <body>
 	<noscript style="color:red;">
-		У тебе джаваскріпт вимкнений, так що нема сенсу нічого вводити
-		<br height="100vw" />
+		У тебе джаваскріпт вимкнений
 	</noscript>
-	<h2>Задача:</h2>
-	<p>
-		\(A \in \mathbb{N} \)
-		<br/>
-		\(B \in \mathbb{N} \)
-	<p/>
-	<div id="preview">
-		\( \sqrt[3]{A^3 + B^3} \in \mathbb{N} \)
-	</div>
-	<p>Знайди будь-які 2 числа, які задовольняють умову задачі</p>
-	<input type="number" placeholder="A" id="num1" min="1" step="1" style="width:29.5vw" />
-	<input type="number" placeholder="B" id="num2" min="1" step="1" style="width:29.5vw" />
-	<br />
-	<br />
-	<button id="submit" style="width:30vw">Перевірити</button>
-	<button style="width:30vw" onclick="window.open('https://github.com/lukassvaibodas/lukassvaibodas.github.io/blob/main/index.html')">
-		Сирцевий код
-	</button>
-	<br />
-	<br />
-	<textarea disabled="true" id="out" style="display:block; width: 95vw; color: black">Тут будуть повідомлення про правильність рішення</textarea>
+	<main hidden="true">
+		<h2>Задача:</h2>
+		<p>
+			\(A \in \mathbb{N} \)
+			<br/>
+			\(B \in \mathbb{N} \)
+		<p/>
+		<div id="preview">
+			\( \sqrt[3]{A^3 + B^3} \in \mathbb{N} \)
+		</div>
+		<p>Знайди будь-які 2 числа, які задовольняють умову задачі</p>
+		<input type="number" placeholder="A" id="num1" min="1" step="1" />
+		<input type="number" placeholder="B" id="num2" min="1" step="1" />
+		<br />
+		<br />
+		<button id="submit" style="width:30vw">Перевірити</button>
+		<button style="width:30vw" onclick="window.open('https://github.com/lukassvaibodas/lukassvaibodas.github.io/blob/main/index.html')">
+			Сирцевий код
+		</button>
+		<br />
+		<br />
+		<textarea disabled="true" id="out" style="display:block; width: 95vw; color: black">Тут будуть повідомлення про правильність рішення</textarea>
+	</main>
+
 	<script lang="javascript">
 	(function() {
 		const maxAtts = 30;
+		var times = 0;
+		document.querySelector("main").hidden = false;
 
 		function updatePrev() {
 			const A = document.getElementById('num1').value || 'A';
@@ -60,8 +72,6 @@
 		document.getElementById('num1').addEventListener('input', updatePrev);
 		document.getElementById('num2').addEventListener('input', updatePrev);
 
-		var times = 0;
-
 		function checkInput(elId) {
 			const val = document.getElementById(elId).value;
 			if (val == '') return 'empty';
@@ -69,7 +79,7 @@
 			if (num == NaN) return 'not a number';
 			if (!isNatural(num)) return 'not natural';
 			return num;
-		}
+		};
 
 		function isNatural(num) {
 			return num > 0 && Math.abs(num - Math.ceil(num)) <= 1.7763568394002505E-15;
@@ -95,6 +105,9 @@
 					return true;
 				};
 			};
+
+			if (num1 == 69 || num2 == 69)
+				alert("Хороша позиція");
 
 			if (!check(num1, 'A') || !check(num2, 'B'))
 				return;
